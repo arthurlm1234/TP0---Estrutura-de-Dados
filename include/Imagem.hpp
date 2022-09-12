@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <string.h>
+#include "memlog.hpp"
 
 class Imagem{
     
@@ -11,7 +13,7 @@ private:
 
 public:
     
-    Imagem(int altura, int largura);
+    Imagem(int altura=0, int largura=0);
 
     struct RGB{
         unsigned char r,g,b,cinza;

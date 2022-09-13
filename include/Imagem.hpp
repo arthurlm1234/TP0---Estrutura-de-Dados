@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <string.h>
 #include "memlog.hpp"
 
 class Imagem{

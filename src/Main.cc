@@ -1,46 +1,46 @@
 #include "Imagem.hpp"
+#include <unistd.h>
+#include <getopt.h>
+#include <string.h>
 
 int main(int argc, char* argv[]){
 
     Imagem* imagem = new Imagem;
-    int cont = 0;
-    
-    while(argv[++cont] != NULL){
-        if(strcmp(argv[cont],"-p")== 0){
-            iniciaMemLog(argv[cont+1]);
-            desativaMemLog();
-            break;
+    int flag;
+    std::string nome_PPM, nome_PGM;
+
+    while((flag = getopt(argc, argv, "i:o:p:l")) != EOF){
+        if (flag == 'i'){
+            nome_PPM = optarg;
+        }
+        else if(flag == 'o'){
+            nome_PGM = optarg;
+        }
+        else if(flag == 'p'){
+            iniciaMemLog(optarg);
+            ativaMemLog();
         }
     }
 
-    cont = 0;
-
+    int cont = 0;
+    bool ativa = false;
+    
     while(argv[++cont] != NULL){
         if(strcmp(argv[cont],"-l") == 0){
-            ativaMemLog();
+            ativa = true;
             break;
         }
     }
 
-    cont = 0;
-    //desativaMemLog();
-
-    while(argv[++cont] != NULL){
-        if(strcmp(argv[cont],"-i")==0){
-            imagem->ler(argv[cont+1]);
-        }
-        else if(strcmp(argv[cont],"-o") == 0){
-            imagem->converter();
-            imagem->escrever(argv[cont+1]);
-        }
+    if(!ativa){
+        desativaMemLog();
     }
-    
-    
-    desativaMemLog();
-    
-    
-    
 
+    imagem->ler(nome_PPM);
+    imagem->converter();
+    imagem->escrever(nome_PGM);
+
+    
     finalizaMemLog();
 
     return 0;

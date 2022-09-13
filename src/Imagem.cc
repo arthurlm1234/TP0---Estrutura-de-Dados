@@ -33,9 +33,9 @@ void Imagem::ler(std::string nome_arquivo){
             entrada >> aux;
             imagem[i][j].b = aux;
 
-            escreveMemLog((long int)(&(imagem[i][j].r)), sizeof(unsigned char),0);
-            escreveMemLog((long int)(&(imagem[i][j].g)), sizeof(unsigned char),0);
-            escreveMemLog((long int)(&(imagem[i][j].b)), sizeof(unsigned char),0);
+            leMemLog((long int)(&(imagem[i][j].r)), sizeof(unsigned char),0);
+            leMemLog((long int)(&(imagem[i][j].g)), sizeof(unsigned char),0);
+            leMemLog((long int)(&(imagem[i][j].b)), sizeof(unsigned char),0);
         }
     }
 
@@ -47,7 +47,7 @@ void Imagem::converter(){
     for(int i = 0; i < altura; i++){
         for(int j = 0; j < largura; j++){
             imagem[i][j].cinza = int((49.0/255.0)*(0.3*imagem[i][j].r + 0.59*(imagem[i][j].g) + 0.11*imagem[i][j].b));
-            escreveMemLog((long int)(&(imagem[i][j].cinza)), sizeof(unsigned char),0);
+            leMemLog((long int)(&(imagem[i][j].cinza)), sizeof(unsigned char),0);
         }
     }
 }

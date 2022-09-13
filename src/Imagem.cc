@@ -10,9 +10,15 @@ void Imagem::ler(std::string nome_arquivo){
     std::ifstream entrada(nome_arquivo);
 
     entrada >> tipo;
+    erroAssert(tipo == "P3", "Tipo de arquivo não suportado, deve ser do tipo P3");
+
     entrada >> largura;
     entrada >> altura;
+    erroAssert(altura>0 && largura>0, "A altura e a largura devem ser positivas.");
+    
     entrada >> cor;
+
+    erroAssert(cor==255, "O atributo cor deve ser de 255");
 
     int aux;
 

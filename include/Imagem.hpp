@@ -3,6 +3,7 @@
 #include <string>
 #include <sstream>
 #include "memlog.hpp"
+#include "msgassert.hpp"
 
 class Imagem{
     

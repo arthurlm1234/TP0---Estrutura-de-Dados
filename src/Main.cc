@@ -1,7 +1,5 @@
 #include "Imagem.hpp"
-#include <unistd.h>
 #include <getopt.h>
-#include <string.h>
 
 bool possui_argumento(char** vetor_argumentos, std::string argumento){
     bool possui = false;
@@ -43,6 +41,8 @@ int main(int argc, char* argv[]){
 
     if(!possui_argumento(argv,"-l") && iniciado)
         desativaMemLog();
+    
+    erroAssert(possui_argumento(argv, "-l") && iniciado, "Você não ativar o memlog sem tê-lo iniciado.");
     
     imagem->ler(nome_PPM);
     imagem->converter();

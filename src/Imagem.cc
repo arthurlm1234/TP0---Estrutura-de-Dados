@@ -79,7 +79,7 @@ void Imagem::escrever(std::string nome_arquivo){
     for(int i = 0; i < altura;i++){
         for(int j = 0; j < largura;j++){
             saida << (int) pgm[i][j];
-            LEMEMLOG((long int)(&(pgm[i][j])), sizeof(unsigned char),0);
+            LEMEMLOG((long int)(&(pgm[i][j])), sizeof(unsigned char),1);
             if(j != largura -1){
                 saida << ' ';
             }

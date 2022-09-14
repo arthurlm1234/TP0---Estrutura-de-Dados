@@ -22,26 +22,26 @@ void Imagem::ler(std::string nome_arquivo){
 
     int aux;
 
-    imagem = new RGB*[altura];
+    ppm = new RGB*[altura];
 
     for(int i = 0; i< altura; i++){
-        imagem[i]= new RGB[largura];
+        ppm[i]= new RGB[largura];
     }
 
     for(int i = 0; i < altura;i++){
         for(int j = 0; j < largura;j++){
             entrada >> aux;
-            imagem[i][j].r = aux;
+            ppm[i][j].r = aux;
 
             entrada >> aux;
-            imagem[i][j].g = aux;
+            ppm[i][j].g = aux;
 
             entrada >> aux;
-            imagem[i][j].b = aux;
+            ppm[i][j].b = aux;
 
-            leMemLog((long int)(&(imagem[i][j].r)), sizeof(unsigned char),0);
-            leMemLog((long int)(&(imagem[i][j].g)), sizeof(unsigned char),0);
-            leMemLog((long int)(&(imagem[i][j].b)), sizeof(unsigned char),0);
+            ESCREVEMEMLOG((long int)(&(ppm[i][j].r)), sizeof(unsigned char),0);
+            ESCREVEMEMLOG((long int)(&(ppm[i][j].g)), sizeof(unsigned char),0);
+            ESCREVEMEMLOG((long int)(&(ppm[i][j].b)), sizeof(unsigned char),0);
         }
     }
 
@@ -50,10 +50,19 @@ void Imagem::ler(std::string nome_arquivo){
 
 void Imagem::converter(){
 
+    pgm = new unsigned char*[altura];
+
+    for(int i = 0; i< altura; i++){
+        pgm[i]= new unsigned char[largura];
+    }
+
     for(int i = 0; i < altura; i++){
         for(int j = 0; j < largura; j++){
-            imagem[i][j].cinza = int((49.0/255.0)*(0.3*imagem[i][j].r + 0.59*(imagem[i][j].g) + 0.11*imagem[i][j].b));
-            leMemLog((long int)(&(imagem[i][j].cinza)), sizeof(unsigned char),0);
+            pgm[i][j] = int((49.0/255.0)*(0.3*ppm[i][j].r + 0.59*(ppm[i][j].g) + 0.11*ppm[i][j].b));
+            ESCREVEMEMLOG((long int)(&(pgm[i][j])), sizeof(unsigned char),0);
+            LEMEMLOG((long int)(&(ppm[i][j].r)), sizeof(unsigned char),1);
+            LEMEMLOG((long int)(&(ppm[i][j].g)), sizeof(unsigned char),1);
+            LEMEMLOG((long int)(&(ppm[i][j].b)), sizeof(unsigned char),1);
         }
     }
 }
@@ -69,8 +78,8 @@ void Imagem::escrever(std::string nome_arquivo){
 
     for(int i = 0; i < altura;i++){
         for(int j = 0; j < largura;j++){
-            saida << (int) imagem[i][j].cinza;
-            escreveMemLog((long int)(&(imagem[i][j].cinza)), sizeof(unsigned char),0);
+            saida << (int) pgm[i][j];
+            LEMEMLOG((long int)(&(pgm[i][j])), sizeof(unsigned char),0);
             if(j != largura -1){
                 saida << ' ';
             }

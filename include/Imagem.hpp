@@ -16,11 +16,12 @@ public:
     Imagem(int altura=0, int largura=0);
 
     struct RGB{
-        unsigned char r,g,b,cinza;
+        unsigned char r,g,b;
     };
 
     void ler(std::string nome_arquivo);
     void converter();
     void escrever(std::string nome_arquivo);
-    RGB **imagem = nullptr;
+    RGB **ppm = nullptr;
+    unsigned char **pgm = nullptr;
 };
